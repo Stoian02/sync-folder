@@ -1,12 +1,24 @@
 package core;
 
+/**
+ * FileInfo class represents information about a file.
+ * It includes the relative path, size, last modified time, and hash of the file.
+ */
 public class FileInfo {
     private String relativePath;
     private long size;
     private long lastModified;
     private String hash;
     
-    // Constructor
+    /**
+     * Constructor for FileInfo.
+     * 
+     * @param relativePath the relative path of the file
+     * @param size the size of the file in bytes
+     * @param lastModified the last modified time of the file in milliseconds since epoch
+     * @param hash the SHA-256 hash of the file
+     * 
+     */
     public FileInfo(String relativePath, long size, long lastModified, String hash) {
         this.relativePath = relativePath;
         this.size = size;
@@ -70,10 +82,10 @@ public class FileInfo {
         this.hash = hash;
     }
 
-    /*
+    /**
      * Overrides the default toString function.
      * 
-     * @return String return the object formatted
+     * @return String The object formatted
      */
     @Override
     public String toString() {

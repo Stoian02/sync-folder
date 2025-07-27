@@ -7,8 +7,19 @@ import java.util.*;
 
 import util.HashUtil;
 
+/**
+ * DirectoryScanner class provides functionality to scan a directory and gather information about its files.
+ * It collects the relative path, size, last modified time, and SHA-256 hash of each file.
+ */
 public class DirectoryScanner {
     
+    /**
+     * Scans the specified directory and returns a map of file information.
+     * 
+     * @param root The root directory to scan
+     * @return Map<String, FileInfo> A map where the key is the relative path and the value is a FileInfo object containing file details
+     * @throws IOException if an error occurs while reading the directory
+     */
     public static Map<String, FileInfo> scan(Path root) throws IOException {
         Map<String, FileInfo> files = new HashMap<>();
 

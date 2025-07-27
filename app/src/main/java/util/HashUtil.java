@@ -5,7 +5,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 
+/**
+ * HashUtil class provides utility methods for computing file hashes.
+ */
 public class HashUtil {
+    /**
+     * Computes the SHA-256 hash of a file.
+     *
+     * @param path the path to the file
+     * 
+     * @return the SHA-256 hash as a hexadecimal string
+     * @throws Exception if an error occurs while reading the file
+     */
     public static String computeSHA256(Path path) throws Exception {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
