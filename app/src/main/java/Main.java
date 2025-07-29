@@ -1,8 +1,11 @@
 import core.DirectoryScanner;
 import core.FileInfo;
+import core.SyncExecutor;
+import core.SyncOperation;
 import util.DiffEngine;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -18,14 +21,12 @@ public class Main {
 
         Path path_1 = Path.of(args_2[0]);
         Path path_2 = Path.of(args_2[1]);
-        // Map<String, FileInfo> result = DirectoryScanner.scan(path);
-
-        // System.out.println("Scanned files:");
-        // result.values().forEach(System.out::println);
 
         Map<String, FileInfo> source = DirectoryScanner.scan(path_1);
         Map<String, FileInfo> target = DirectoryScanner.scan(path_2);
 
-        DiffEngine.compare(source, target);
+        List<SyncOperation> operations = DiffEngine.compare(source, target);
+
+        SyncExecutor.execute(operations, path_1, path_2, true);
     }
 }
