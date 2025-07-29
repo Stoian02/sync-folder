@@ -8,8 +8,8 @@ import java.util.List;
 public class SyncExecutor {
     
     public static void execute(List<SyncOperation> operations, Path sourceRoot, Path targetRoot, boolean dryRun) {
-        Path sourcePath = sourceRoot.resolve("source");
-        Path targetPath = sourceRoot.resolve("target");;
+        Path sourcePath;
+        Path targetPath;
 
         for (SyncOperation operation : operations) {
             switch (operation.getAction()) {
@@ -24,7 +24,7 @@ public class SyncExecutor {
 
                     try {
                         Files.createDirectories(targetPath.getParent());
-                        Files.copy(sourcePath, targetPath);
+                        Files.copy(sourcePath, targetPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
                         System.out.println("[COPIED] " + sourcePath + " > " + targetPath);
                     } catch (Exception e) {
                         System.err.println("Failed to copy file: " + sourcePath + " > " + targetPath + ", error: " + e.getMessage());
@@ -32,11 +32,10 @@ public class SyncExecutor {
                     
                     break;
                 case DELETE:
-                    sourcePath = sourceRoot.resolve(operation.getRelativePath());
                     targetPath = targetRoot.resolve(operation.getRelativePath());
 
                     if (dryRun) {
-                        System.out.println("[DRY RUN] DELETE: " + sourcePath + " > " + targetPath);
+                        System.out.println("[DRY RUN] DELETE: " + targetPath);
                         break;
                     }
 
@@ -67,11 +66,11 @@ public class SyncExecutor {
                     break;
                 case SKIP:
                     if (dryRun) {
-                        System.out.println("[DRY RUN] SKIP: " + operation.getRelativePath() + " from source: " + sourceRoot + " to target:"  + targetRoot );
+                        System.out.println("[DRY RUN] SKIP: " + operation.getRelativePath());
                         break;
                     }
 
-                    System.out.println("[SKIPPED] " + operation.getRelativePath() + " from source: " + sourceRoot + " to target:"  + targetRoot );
+                    System.out.println("[SKIPPED] " + operation.getRelativePath());
 
                     break;
                 default:
