@@ -20,19 +20,16 @@ public class DiffEngine {
             if (targetFile == null) {
                 // Not in target, must copy
                 operations.add(new SyncOperation(SyncAction.COPY, path, sourceFile, null));
-                System.out.println("File " + path + " needs to be copied.");
             } else {
-                // Exists in both, check for difference
+                // TODO: Maybe remove the check for time, because it is not very reliable. 
                 boolean isDifferent = sourceFile.getSize() != targetFile.getSize()
                         || sourceFile.getLastModified() != targetFile.getLastModified()
                         || !sourceFile.getHash().equals(targetFile.getHash());
 
                 if (isDifferent) {
                     operations.add(new SyncOperation(SyncAction.UPDATE, path, sourceFile, targetFile));
-                    System.out.println("File " + path + " needs to be updated.");
                     continue;
                 }
-                System.out.println("File " + path + " is the same, no action needed.");
             }
         }
 
@@ -41,7 +38,6 @@ public class DiffEngine {
             String path = entry.getKey();
             if (!source.containsKey(path)) {
                 operations.add(new SyncOperation(SyncAction.DELETE, path, null, entry.getValue()));
-                System.out.println("File " + path + " needs to be deleted from target.");
             }
         }
 
