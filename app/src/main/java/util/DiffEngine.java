@@ -29,6 +29,8 @@ public class DiffEngine {
                 if (isDifferent) {
                     operations.add(new SyncOperation(SyncAction.UPDATE, path, sourceFile, targetFile));
                     continue;
+                } else {
+                    operations.add(new SyncOperation(SyncAction.SKIP, path, sourceFile, targetFile));
                 }
             }
         }
