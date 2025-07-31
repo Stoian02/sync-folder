@@ -9,6 +9,9 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+
 }
 
 repositories {
@@ -42,4 +45,13 @@ java {
 application {
     // Define the main class for the application.
     mainClass = 'Main'
+}
+
+shadowJar {
+    archiveBaseName.set('syncfolder')
+    archiveVersion.set('')
+    archiveClassifier.set('all')
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
 }
