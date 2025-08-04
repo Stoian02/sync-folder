@@ -7,9 +7,13 @@
 ## 🔧 Usage
 You first need to build the fat .jar file 
 ```bash
-java -jar build/libs/sync-folder.jar sync <source> <target> [options]
+./gradlew shadowJar
 ```
 And then you can run the installation script
 ```bash
 sudo ./install_syncfolder.sh
+```
+Lastly, run the cli with:
+```bash
+syncfolder ./source ./target --dryrun
 ```
