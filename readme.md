@@ -4,18 +4,12 @@
 
 ---
 
-## 🚀 Features
-
-- 🗂️ One-way or two-way sync modes
-- 🔍 Compares files using size, timestamp, and SHA-256 hash
-- 🧪 Dry-run mode to preview changes without applying them
-- 📣 Verbose output with status messages
-- 🔁 Optional file watcher to sync on change
-- 📦 No frameworks — just plain Java + Gradle + Picocli
-
----
-
 ## 🔧 Usage
-
+You first need to build the fat .jar file 
 ```bash
 java -jar build/libs/sync-folder.jar sync <source> <target> [options]
+```
+And then you can run the installation script
+```bash
+sudo ./install_syncfolder.sh
+```
